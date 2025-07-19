@@ -104,6 +104,22 @@ async function run() {
             }
         });
 
+        //Get all the foods
+        app.get('/foods', async (req, res) => {
+            try {
+
+
+                const foods = await foodCollection
+                    .find()
+                    .toArray();
+
+                res.json(foods);
+            } catch (err) {
+                console.error('Error fetching foods:', err);
+                res.status(500).send({ error: 'Failed to fetch foods' });
+            }
+        });
+
         // Search and list available foods
         app.get('/food', async (req, res) => {
             try {
