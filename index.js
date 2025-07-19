@@ -14,7 +14,7 @@ admin.initializeApp({
     credential: admin.credential.cert(serviceAccount),
 });
 
-// ===== Middleware to verify Firebase ID Token =====
+
 const verifyToken = async (req, res, next) => {
     const authHeader = req.headers.authorization;
     if (!authHeader || !authHeader.startsWith('Bearer ')) {
