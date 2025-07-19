@@ -38,10 +38,19 @@ const verifyToken = async (req, res, next) => {
 };
 
 // ===== General Middleware =====
-app.use(cors({
-    origin: 'http://localhost:5173',
-    credentials: true,
-}));
+// app.use(cors({
+//     origin: 'http://localhost:5173',
+//     credentials: true,
+// }));
+
+app.use(
+    cors({
+        origin: ['http://localhost:5173', 'https://assignment11-b015f.web.app'],
+        credentials: true,
+    })
+);
+
+
 app.use(express.json());
 
 // ===== MongoDB Setup =====
@@ -101,22 +110,6 @@ async function run() {
             } catch (err) {
                 console.error('Error inserting food:', err);
                 res.status(500).send({ error: 'Failed to add food' });
-            }
-        });
-
-        //Get all the foods
-        app.get('/foods', async (req, res) => {
-            try {
-
-
-                const foods = await foodCollection
-                    .find()
-                    .toArray();
-
-                res.json(foods);
-            } catch (err) {
-                console.error('Error fetching foods:', err);
-                res.status(500).send({ error: 'Failed to fetch foods' });
             }
         });
 
